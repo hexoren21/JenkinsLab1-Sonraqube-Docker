@@ -6,7 +6,7 @@ pipeline {
             scannerHome = tool 'sonarscanner4'
           }
             steps {
-                withSonarQubeEnv('SonarQube') {
+                withSonarQubeEnv('sonar-pro') {
                     sh 'mvn sonar:sonar -Dsonar.projectKey=my-project' 
                 }
             }
