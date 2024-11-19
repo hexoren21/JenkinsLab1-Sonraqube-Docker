@@ -1,6 +1,14 @@
 pipeline {
     agent any
     stages {
+        stage('Prepare Files for SonarQube') {
+            steps {
+                sh '''
+                wget https://www.tooplate.com/zip-templates/2135_mini_finance.zip
+                unzip 2135_mini_finance.zip
+                '''
+            }
+        }
         stage('SonarQube Analysis') {
             environment {
             scannerHome = tool 'sonar4.7'
@@ -12,7 +20,7 @@ pipeline {
                         -Dsonar.projectKey=my-html-css-project \
                         -Dsonar.projectName=HTML-CSS-Project \
                         -Dsonar.projectVersion=1.0 \
-                        -Dsonar.sources=. \
+                        -Dsonar.sources=2135_mini_finance/ \
                         -Dsonar.language=web \
                         -Dsonar.sourceEncoding=UTF-8
                         '''
