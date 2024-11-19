@@ -7,7 +7,15 @@ pipeline {
           }
             steps {
                 withSonarQubeEnv('sonar-pro') {
-                    sh 'mvn sonar:sonar -Dsonar.projectKey=my-project' 
+                        sh '''
+                        ${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=my-html-css-project \
+                        -Dsonar.projectName=HTML-CSS-Project \
+                        -Dsonar.projectVersion=1.0 \
+                        -Dsonar.sources=. \
+                        -Dsonar.language=web \
+                        -Dsonar.sourceEncoding=UTF-8
+                        '''
                 }
             }
         }
