@@ -17,6 +17,9 @@ pipeline {
                         -Dsonar.sourceEncoding=UTF-8
                         '''
                 }
+                timeout(time: 10, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+            }
             }
         }
         stage('Build Docker Image') {
