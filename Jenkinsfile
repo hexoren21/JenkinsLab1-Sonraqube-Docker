@@ -12,7 +12,6 @@ pipeline {
                         wget https://www.tooplate.com/zip-templates/2135_mini_finance.zip && \\
                         unzip 2135_mini_finance.zip && \\
                         cp -r 2135_mini_finance/* /var/www/html/ && \\
-                        systemctl restart apache2
                     CMD ["apachectl", "-D", "FOREGROUND"]
                     '''
                 }
