@@ -21,7 +21,7 @@ pipeline {
             }
         }
         stage('Check Quality Gate') {
-            ssteps {
+            steps {
                 script {
                     echo "Waiting for SonarQube to process the Quality Gate..."
                     sleep(time: 30, unit: 'SECONDS') 
