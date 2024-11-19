@@ -17,9 +17,19 @@ pipeline {
                         -Dsonar.sourceEncoding=UTF-8
                         '''
                 }
-                timeout(time: 10, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
+               
             }
+        }
+        tage('Check Quality Gate') {
+            steps {
+                script {
+                    def qualityGate = waitForQualityGate(abortPipeline: false) 
+                    if (qualityGate.status != 'OK') {
+                        error "Pipeline stopped: Quality Gate failed with status: ${qualityGate.status}"
+                    } else {
+                        echo "Quality Gate passed!"
+                    }
+                }
             }
         }
         stage('Build Docker Image') {
