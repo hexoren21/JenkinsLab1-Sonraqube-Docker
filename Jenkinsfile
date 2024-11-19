@@ -1,6 +1,16 @@
 pipeline {
     agent any
     stages {
+        stage('SonarQube Analysis') {
+            environment {
+            scannerHome = tool 'sonarscanner4'
+          }
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=my-project' 
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
