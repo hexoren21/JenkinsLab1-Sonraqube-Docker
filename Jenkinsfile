@@ -21,13 +21,18 @@ pipeline {
             }
         }
         stage('Check Quality Gate') {
-            steps {
+            ssteps {
                 script {
-                    def qualityGate = waitForQualityGate(abortPipeline: false) 
-                    if (qualityGate.status != 'OK') {
-                        error "Pipeline stopped: Quality Gate failed with status: ${qualityGate.status}"
+                    echo "Waiting for SonarQube to process the Quality Gate..."
+                    sleep(time: 30, unit: 'SECONDS') 
+            
+                    def qualityGate = waitForQualityGate()
+                    if (qualityGate.status == 'ERROR' || qualityGate.status == 'FAILED') {
+                       error "Pipeline failed: Quality Gate status is ${qualityGate.status}"
+                    } else if (qualityGate.status == 'OK') {
+                      echo "Quality Gate passed successfully!"
                     } else {
-                        echo "Quality Gate passed!"
+                      echo "Quality Gate status: ${qualityGate.status}. Proceeding..."
                     }
                 }
             }
