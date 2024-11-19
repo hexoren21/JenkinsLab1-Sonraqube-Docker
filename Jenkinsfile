@@ -4,6 +4,7 @@ pipeline {
         stage('Prepare Files for SonarQube') {
             steps {
                 sh '''
+                apt install unzip -y
                 wget https://www.tooplate.com/zip-templates/2135_mini_finance.zip
                 unzip 2135_mini_finance.zip
                 '''
