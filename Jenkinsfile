@@ -20,7 +20,7 @@ pipeline {
                
             }
         }
-        tage('Check Quality Gate') {
+        stage('Check Quality Gate') {
             steps {
                 script {
                     def qualityGate = waitForQualityGate(abortPipeline: false) 
