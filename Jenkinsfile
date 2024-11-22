@@ -72,17 +72,17 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            echo "Cleaning up resources..."
-            sh 'docker stop test-apache || true'
-            sh 'docker rm test-apache || true'
-        }
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed!'
-        }
-    }
+    // post {
+    //     always {
+    //         echo "Cleaning up resources..."
+    //         sh 'docker stop test-apache || true'
+    //         sh 'docker rm test-apache || true'
+    //     }
+    //     success {
+    //         echo 'Pipeline completed successfully!'
+    //     }
+    //     failure {
+    //         echo 'Pipeline failed!'
+    //     }
+    // }
 }
