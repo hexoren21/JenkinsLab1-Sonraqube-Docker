@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('SonarQube Analysis') {
             environment {
-            scannerHome = tool 'sonar4.7'
-          }
+                scannerHome = tool 'sonar4.7'
+            }
             steps {
                 withSonarQubeEnv('sonar-pro') {
                         sh '''
@@ -17,22 +17,21 @@ pipeline {
                         -Dsonar.sourceEncoding=UTF-8
                         '''
                 }
-               
             }
         }
         stage('Check Quality Gate') {
             steps {
                 script {
-                    echo "Waiting for SonarQube to process the Quality Gate..."
-                    sleep(time: 30, unit: 'SECONDS') 
-            
+                    echo 'Waiting for SonarQube to process the Quality Gate...'
+                    sleep(time: 30, unit: 'SECONDS')
+
                     def qualityGate = waitForQualityGate()
                     if (qualityGate.status == 'ERROR' || qualityGate.status == 'FAILED') {
-                       error "Pipeline failed: Quality Gate status is ${qualityGate.status}"
+                        error "Pipeline failed: Quality Gate status is ${qualityGate.status}"
                     } else if (qualityGate.status == 'OK') {
-                      echo "Quality Gate passed successfully!"
+                        echo 'Quality Gate passed successfully!'
                     } else {
-                      echo "Quality Gate status: ${qualityGate.status}. Proceeding..."
+                        echo "Quality Gate status: ${qualityGate.status}. Proceeding..."
                     }
                 }
             }
@@ -66,23 +65,23 @@ pipeline {
                     if (status != '200') {
                         error "Application is not working as expected! HTTP Status: ${status}"
                     } else {
-                        echo "Application is running successfully!"
+                        echo 'Application is running successfully!'
                     }
                 }
             }
         }
     }
-    // post {
-    //     always {
-    //         echo "Cleaning up resources..."
-    //         sh 'docker stop test-apache || true'
-    //         sh 'docker rm test-apache || true'
-    //     }
-    //     success {
-    //         echo 'Pipeline completed successfully!'
-    //     }
-    //     failure {
-    //         echo 'Pipeline failed!'
-    //     }
-    // }
+// post {
+//     always {
+//         echo "Cleaning up resources..."
+//         sh 'docker stop test-apache || true'
+//         sh 'docker rm test-apache || true'
+//     }
+//     success {
+//         echo 'Pipeline completed successfully!'
+//     }
+//     failure {
+//         echo 'Pipeline failed!'
+//     }
+// }
 }
