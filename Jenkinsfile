@@ -17,7 +17,6 @@ pipeline {
                         -Dsonar.sources=2135_mini_finance/ \
                         -Dsonar.language=web \
                         -Dsonar.sourceEncoding=UTF-8
-                        -Dsonar.scanner.javaAdditionalOpts="--add-opens java.base/java.lang=ALL-UNNAMED"
                         '''
                 }
             }
