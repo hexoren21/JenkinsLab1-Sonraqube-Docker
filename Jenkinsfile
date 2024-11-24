@@ -51,7 +51,7 @@ pipeline {
                 // Stop and remove existing container if it exists
                 sh 'docker stop test-apache2 || true'
                 sh 'docker rm test-apache2 || true'
-                sh 'docker run -d -p 8080:80 --name test-apache2 test-apache2'
+                sh 'docker run -d -P --name test-apache2 test-apache2'
             }
         }
         stage('Test Application') {
