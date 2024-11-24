@@ -46,14 +46,14 @@ pipeline {
                 }
             }
         }
-        stage('Run Docker Container') {
-            steps {
+        // stage('Run Docker Container') {
+            // steps {
                 //Stop and remove existing container if it exists
-                sh 'docker stop test-apache || true'
-                sh 'docker rm test-apache || true'
-                sh 'docker run -d -p 8080:80 --name test-apache test-apache'
-            }
-        }
+                // sh 'docker stop test-apache || true'
+                // sh 'docker rm test-apache || true'
+                // sh 'docker run -d -p 8080:80 --name test-apache test-apache'
+            // }
+        // }
         stage('Test Application') {
             steps {
                 script {
