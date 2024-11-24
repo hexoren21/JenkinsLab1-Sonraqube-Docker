@@ -42,18 +42,18 @@ pipeline {
             steps {
                 script {
                     echo "Building Docker image from Dockerfile"
-                    sh 'docker build -t test-apache .'
+                    sh 'docker build -t test-apache2 .'
                 }
             }
         }
-        // stage('Run Docker Container') {
-            // steps {
-                //Stop and remove existing container if it exists
-                // sh 'docker stop test-apache || true'
-                // sh 'docker rm test-apache || true'
-                // sh 'docker run -d -p 8080:80 --name test-apache test-apache'
-            // }
-        // }
+        stage('Run Docker Container') {
+            steps {
+                // Stop and remove existing container if it exists
+                sh 'docker stop test-apache2 || true'
+                sh 'docker rm test-apache2 || true'
+                sh 'docker run -d -p 8080:80 --name test-apache2 test-apache2'
+            }
+        }
         stage('Test Application') {
             steps {
                 script {
