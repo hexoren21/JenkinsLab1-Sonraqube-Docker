@@ -10,7 +10,7 @@ pipeline {
                         sh '''
                         ${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=my-html-css-project \
-                        -Dsonar.projectName=HTML-CSS-Project \
+                        -Dsonar.projectName=HTML-CSS-Project-v2 \
                         -Dsonar.projectVersion=1.0 \
                         -Dsonar.sources=2135_mini_finance/ \
                         -Dsonar.language=web \
@@ -39,18 +39,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    writeFile file: 'Dockerfile', text: '''
-                    FROM ubuntu:20.04
-                    ENV DEBIAN_FRONTEND=noninteractive
-                    ENV TZ=Etc/UTC
-                    RUN apt update && apt install apache2 wget unzip -y
-                    RUN wget https://www.tooplate.com/zip-templates/2135_mini_finance.zip
-                    RUN unzip 2135_mini_finance.zip
-                    RUN cp -r 2135_mini_finance/* /var/www/html/
-                    CMD ["apachectl", "-D", "FOREGROUND"]
-                    '''
-                }
-                sh 'docker build -t test-apache .'
+                    echo "Building Docker image from Dockerfile"
+                    sh 'docker build -t test-apache .'
             }
         }
         stage('Run Docker Container') {
