@@ -11,7 +11,7 @@ pipeline {
                 withSonarQubeEnv('sonar-pro') {
                         sh '''
                         ${scannerHome}/bin/sonar-scanner \
-                        -Dsonar.projectKey=my-html-css-project \
+                        -Dsonar.projectKey=my-html-css-project-v2\
                         -Dsonar.projectName=HTML-CSS-Project-v2 \
                         -Dsonar.projectVersion=1.0 \
                         -Dsonar.sources=2135_mini_finance/ \
@@ -48,6 +48,9 @@ pipeline {
         }
         stage('Run Docker Container') {
             steps {
+                //Stop and remove existing container if it exists
+                sh 'docker stop test-apache || true'
+                sh 'docker rm test-apache || true'
                 sh 'docker run -d -p 8080:80 --name test-apache test-apache'
             }
         }
