@@ -41,6 +41,7 @@ pipeline {
                 script {
                     echo "Building Docker image from Dockerfile"
                     sh 'docker build -t test-apache .'
+                }
             }
         }
         stage('Run Docker Container') {
