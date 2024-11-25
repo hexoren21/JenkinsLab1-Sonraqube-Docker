@@ -59,7 +59,7 @@ pipeline {
         stage('Test Application') {
             steps {
                 script {
-                    def status = sh(script: 'curl -o /dev/null -s -w "%{http_code}" http://localhost:8080', returnStdout: true).trim()
+                    def status = sh(script: 'curl -o /dev/null -s -w "%{http_code}" http://10.97.190.23:8080', returnStdout: true).trim()
                     if (status != '200') {
                         error "Application is not working as expected! HTTP Status: ${status}"
                     } else {
