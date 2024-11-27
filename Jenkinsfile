@@ -53,13 +53,13 @@ pipeline {
                 // Stop and remove existing container if it exists
                 sh 'docker stop test-apache2 || true'
                 sh 'docker rm test-apache2 || true'
-                sh 'docker run -d -p 80:80 --name test-apache2 test-apache2'
+                sh 'docker run -d -p 81:80 --name test-apache2 test-apache2'
             }
         }
         stage('Test Application') {
             steps {
                 script {
-                    def status = sh(script: 'curl -o /dev/null -s -w "%{http_code}" http://localhost:80', returnStdout: true).trim()
+                    def status = sh(script: 'curl -o /dev/null -s -w "%{http_code}" http://localhost:81', returnStdout: true).trim()
                     if (status != '200') {
                         error "Application is not working as expected! HTTP Status: ${status}"
                     } else {
