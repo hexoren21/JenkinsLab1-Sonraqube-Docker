@@ -39,7 +39,7 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            agent { label 'Docker-server' }
+            // agent { label 'Docker-server' }
             steps {
                 script {
                     echo "Building Docker image from Dockerfile"
