@@ -39,7 +39,7 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            agent { label 'master' }
+            // agent { label 'master' }
             steps {
                 script {
                     echo "Building Docker image from Dockerfile"
@@ -48,7 +48,7 @@ pipeline {
             }
         }
         stage('Run Docker Container') {
-            agent { label 'master' }
+            // agent { label 'master' }
             steps {
                 // Stop and remove existing container if it exists
                 sh 'docker stop test-apache2 || true'
