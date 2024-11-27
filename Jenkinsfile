@@ -68,6 +68,15 @@ pipeline {
                 }
             }
         }
+        stage('Docker Push') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'dockerhub') {
+                        sh "docker push heoxren/ci-cd-integration:latest"
+                    }
+                }
+            }
+        }
     }
 // post {
 //     always {
