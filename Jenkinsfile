@@ -78,6 +78,11 @@ pipeline {
                 }
             }
         }
+        stage('Triger CD Pipeline') {
+            steps {
+                build job: "Docker-jenkins-sonarqube-v3-Cd"
+            }
+        }
     }
 // post {
 //     always {
