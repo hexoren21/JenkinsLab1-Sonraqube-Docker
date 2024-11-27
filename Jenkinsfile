@@ -72,6 +72,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-hub') {
+                        sh 'docker build -t heoxren/ci-cd-integration:latest .'
                         sh "docker push heoxren/ci-cd-integration:latest"
                     }
                 }
